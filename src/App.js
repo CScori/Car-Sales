@@ -4,8 +4,9 @@ import Header from './components/Header';
 import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
+import { connect } from 'react-redux';
 
-const App = (props) => {
+export const App = () => {
   // const state = {
   //   additionalPrice: 0,
   //   car: {
@@ -34,15 +35,33 @@ const App = (props) => {
   return (
     <div className="boxes">
       <div className="box">
-        <Header car={state.car} />
-        <AddedFeatures car={state.car} />
+        {/* header takes car */}
+        <Header />
+        {/* features takes car */}
+        <AddedFeatures/>
       </div>
       <div className="box">
-        <AdditionalFeatures store={state.store} />
-        <Total car={state.car} additionalPrice={state.additionalPrice} />
+        {/* more features takes state  store*/}
+        <AdditionalFeatures />
+        {/* total takes car and addtl price */}
+        <Total />
       </div>
     </div>
   );
 };
-
 export default App;
+
+// const mapStateToProps = state => {
+//   console.log('app state to pass', state);
+//   // the keys of the returned obj will be props passed into the comp
+//   return {
+//     additionalPrice: state.additionalPrice,
+//     car: state.car,
+//     store: state.store
+//   };
+// };
+
+// export default connect(
+//   mapStateToProps,
+//   {}
+// )(App);
