@@ -1,4 +1,4 @@
-import { ADD_FEATURE } from '../actions/index'
+import { ADD_FEATURE, REMOVE_LIST } from '../actions/index'
 
 export const initialState = {
     additionalPrice: 0,
@@ -20,33 +20,39 @@ export const initialState = {
 
 
 export const carReducer = (state = initialState, action) => {
-    console.log(action, state);
+    console.log("in the reducer", action, state);
     switch (action.type) {
         case ADD_FEATURE:
-            const addedFeature = state.additionalFeatures.find(item => {return item.id === action.payload})
-            const newState = {
+            console.log('reducer state', state.car.features)
+            console.log('payload', action.payload.id)
+            return {
                 ...state,
                 car: {
                     ...state.car,
-                    price: state.car.price + addedFeature.price,
-                    features: [
-                        ...state.car.features,
-                        addedFeature
-                    ],
+                    price: state.car.price + action.payload.price,
+                    features: [...state.car.features, action.payload]
                 },
-                additionalFeatures: state.additionalFeatures.filter(item => {
-                    if (item.id === action.payload) {
-                        return false;
-                    } else {
-                        return true;
-                    }
+                add: state.add.filter(item => {
+                    return item.id !== action.payload.id;
                 })
+            };
+            case REMOVE_LIST:
+                    return {
+                        ...state,
+                        car: {
+                            ...state.car,
+                            price: state.car.price - action.payload.price,
+                            features: state.car.features.filter(
+                                ({ id }) =>
+                                    ![
+                                        ...state.add.map(({ id }) => id),
+                                        action.payload.id
+                                    ].includes(id)
+                            )
+                        },
+                        store: [...state.store, action.payload]
+                    };
+                default:
+                    return state;
             }
-            return {
-                ...newState,
-                features: action.payload,
-            }
-      default:
-        return state;
-    }
-  };
+        }

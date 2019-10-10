@@ -1,7 +1,7 @@
 import React from 'react';
 import AdditionalFeature from './AdditionalFeature';
 import { connect } from 'react-redux';
-
+import { addPrice } from '../actions'
 class AdditionalFeatures extends React.Component{
   
   
@@ -31,4 +31,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {addFeatures})(AdditionalFeatures);
+export default connect(mapStateToProps, null)(AdditionalFeatures);
