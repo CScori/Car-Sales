@@ -26,10 +26,9 @@ class AdditionalFeatures extends React.Component{
 
 const mapStateToProps = state => {
   console.log('addtl', state.reducer.add);
-  // the keys of the returned obj will be props passed into the comp
   return {
     add: state.reducer.add
   };
 };
 
-export default connect(mapStateToProps, null)(AdditionalFeatures);
+export default connect(mapStateToProps, {addFeatures})(AdditionalFeatures);
