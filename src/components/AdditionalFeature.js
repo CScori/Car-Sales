@@ -7,18 +7,10 @@ const AdditionalFeature = props => {
   return (
     <li>
       
-      <button onClick={e => {props.addPrice(props.feature.id) }} className="button">Add</button>
+      <button onClick={e => {props.addPrice(props.feature) }} className="button">Add</button>
       {props.feature.price} (+{props.feature.price})
     </li>
   );
 };
 
-const mapStateToProps = state => {
-  console.log('single', state.reducer.add);
-  return {
-    add: state.reducer.add,
-    car: state.reducer.car
-  };
-};
-
-export default connect(mapStateToProps, { addPrice })(AdditionalFeature);
+export default AdditionalFeature

@@ -13,7 +13,7 @@ class AdditionalFeatures extends React.Component{
         {this.props.add.length ? (
           <ol type="1">
             {this.props.add.map(item => (
-              <AdditionalFeature key={item.id} feature={item} />
+              <AdditionalFeature key={item.id} feature={item} addPrice={this.props.addPrice}/>
             ))}
           </ol>
         ) : (
@@ -31,4 +31,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(AdditionalFeatures);
+export default connect(mapStateToProps, { addPrice })(AdditionalFeatures);
